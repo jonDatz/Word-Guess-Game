@@ -1,6 +1,6 @@
 # Word-Guess-Game
 
-Making a hangman game out of html/css(BootStrap]/js
+Making a hangman game out of html/css(BootStrap)/js
 
 ### Rules ###
 1. Type any letter to start playing
