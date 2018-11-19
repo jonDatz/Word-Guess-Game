@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Hangman v0.1</title>
+    <title>Hangman v0.2</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
@@ -18,10 +18,10 @@
 
         <!-- Jumbotron -->
         <div class="jumbotron jumboTop">
-            <h1 class="display-4">Welcome to <strong>Hangman v0.1</strong></h1>
+            <h1 class="display-4">Welcome to <strong>Hangman v0.2 </strong><span class="badge badge-warning">WIP</span></h1>
             <br>
             <br>
-            <h2 class="display-4" id="word"><strong></strong>_ _ _ _ _ _</strong></h2>
+            <h2 class="display-4" id="underscores"><strong></strong></h2>
 
 
 
@@ -30,17 +30,17 @@
             <div class="row">
 
                 <div class="alert alert-warning col-md-4" role="alert">
-                    <p class="alert-heading" id="guesses">Guesses Remaining: <strong  id="remainingGuesses">8</strong></p>
+                    <p class="alert-heading" id="guesses">Guesses Remaining: <strong  id="remainingGuesses">10</strong></p>
                     <hr>
                     <p class="text-muted" id="guessesMade">Sample Text</p>
                 </div>
 
                 <div class="alert alert-success col-md-4" role="alert">
-                    <p class="alert-heading" id="wins">Wins:</p><hr>
+                    <p class="alert-heading" id="wins">Wins: <strong  id="wins">0</strong></p><hr>
                 </div>
 
                 <div class="alert alert-danger col-md-4" role="alert">
-                    <p class="alert-heading" id="Losses">Losses:</p><hr>
+                    <p class="alert-heading" id="Losses">Losses: <strong  id="losses">0</strong></p><hr>
                 </div>
 
             </div>
@@ -48,9 +48,9 @@
             <p class="lead">The rules are simple:</p>
             <ol class="ruleSet">
                 <li>Type any letter to start playing</li>
-                <li>Guess letters correctly to win</li>
+                <li>Guess all letters correctly to win</li>
                 <li>Wrong letters will deplete attempts</li>
-                <li>8 wrong letters will result in a loss</li>
+                <li>10 wrong letters will result in a loss</li>
             </ol>
 
         </div>
