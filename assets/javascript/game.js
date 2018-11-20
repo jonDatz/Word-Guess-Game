@@ -1,75 +1,53 @@
 // create array for words
 
-var hmWord = ['squirtle', 'charmander', 'bulbasaur'];
+var hmWord = ['squirtle', 'charmander', 'bulbasaur', 'diglett', 'dragonite', 'tentacool']; // Words to choose from
 
 // For repeat letters
 
 var doubleWord = ['a', 'b', 'c',
-    'd', 'e', 'f',
-    'g', 'h', 'i',
-    'j', 'k', 'l',
-    'm', 'n', 'o',
-    'p', 'q', 'r',
-    's', 't', 'u',
-    'v', 'w', 'x',
-    'y', 'z'
-];
+                  'd', 'e', 'f',
+                  'g', 'h', 'i',
+                  'j', 'k', 'l',
+                  'm', 'n', 'o',
+                  'p', 'q', 'r',
+                  's', 't', 'u',
+                  'v', 'w', 'x',
+                  'y', 'z'
+                 ];
 
 // choose a word randomly
 var hmNumber = Math.floor(Math.random() * hmWord.length);
 var pickWord = hmWord[hmNumber];
 var lettersInWord = [];
 var underScore = [];
-var rightWord = [];
-var wrongWord = [];
+var rightLetter = [];
+var wrongLetter = [];
 
 
 var guessesLeft = 10;
 var wins = 0;
 var losses = 0;
 
-
-// RESET
+// *** I NEED TO BUILD A RESET ***
 
 function reset() {
-    var hmNumber = Math.floor(Math.random() * hmWord.length);
-    var pickWord = hmWord[hmNumber];
-    var lettersInWord = [];
-    var underScore = [];
-    var rightWord = [];
-    var wrongWord = [];
-    var doubleWord = ['a', 'b', 'c',
-    'd', 'e', 'f',
-    'g', 'h', 'i',
-    'j', 'k', 'l',
-    'm', 'n', 'o',
-    'p', 'q', 'r',
-    's', 't', 'u',
-    'v', 'w', 'x',
-    'y', 'z'
-    ];
 
+console.log('It runs!');
+    
 }
 
+// *** Working on the DOM ***
 
+console.log(pickWord); // Console out the randomly chosen word
 
+lettersInWord = pickWord.split('');
+console.log(lettersInWord);
 
-
-
-// Working on the DOM
-
-
-// var domUnderscores = document.getElementById('underscores');
-
-console.log(pickWord);
-// Create underscores based on word length
+// This function creates underscores based on word length
 
 function makeUnderscores() {
 
-    lettersInWord = pickWord.split('');
-    console.log(lettersInWord);
-
-    for (var i = 0; i < pickWord.length; i++) {
+    for (var i = 0; i < lettersInWord.length; i++) {
 
         underScore.push('_');
 
@@ -79,63 +57,92 @@ function makeUnderscores() {
     return underScore;
 }
 
-console.log(makeUnderscores());
-
-// get users guess
-document.onkeyup = function (event) {
-
-    // create variable from key press 
-    var userGuess = event.key;
-    console.log(userGuess);
-
-    // check if keypress matches the selected word
-    if (pickWord.indexOf(userGuess) > -1) {
-        console.log(true);
-
-        // add to right words array
-        rightWord.push(userGuess);
-
-        underScore[pickWord.indexOf(userGuess)] = userGuess;
-        console.log(underScore);
-
-        //Writes initial underscores to screen, removes commas with .join(' ')
-        document.getElementById('underscores').innerHTML = underScore.join(' ');
-
-    } else {
-
-        // if the incorrect letter is already guessed
-        if (wrongWord.includes(userGuess)) {
-
-            // feedback to check success
-            console.log('Wrong guess already answered');
-
-        } else if (guessesLeft > 0) {
 
 
+console.log(makeUnderscores()); // Console out to check that underscores printed correctly
 
-            // If incorrect letter given, push to wrongWord array
-            wrongWord.push(userGuess);
 
-            //subtract from guesses left before losing
-            guessesLeft--;
-            console.log(guessesLeft);
+// *** BELOW DOES THIS ***
+// .onkeyup records users key press
+// userGuess creates a variable from key press 
+// if(pickWord) checks if keypress matches the selected word 
+// rightLetter.push(userGuess) adds guess to right words array
 
-            // Write to html the incorrect guesses & how many guesses are 
-            document.getElementById('guessesMade').innerHTML = wrongWord.join(', ');
-            document.getElementById('remainingGuesses').innerHTML = guessesLeft;
+    document.onkeyup = function (event) {
 
-        } else {
+        var userGuess = event.key;
+        console.log(userGuess);
 
-            document.getElementById('remainingGuesses').innerHTML = "You lose!";
-            losses++;
-            document.getElementById('losses').innerHTML = losses;
-            reset();
+        
+        if (pickWord.indexOf(userGuess) > -1) {
+
+            for (var j = 0; j < pickWord.length; j++) {
+
+                if(lettersInWord[j] === userGuess){
+                                    
+                    rightLetter.push(userGuess);
+
+                underScore[pickWord.indexOf(userGuess)] = userGuess;
+                }
+
+
+            }
+
+            console.log(underScore);
+
+            document.getElementById('underscores').innerHTML = underScore.join(' ');
+        } 
+
+        // *** YOU WIN!!! But it's triggered too late. Where do i add this?
+        else if (underScore.join('') === pickWord){
+            console.log('You win!');
+            wins++;
+            console.log(wins);
+            document.getElementById('wins').innerHTML = wins;
+
+        }
+        
+            
+        else {
+
+            // if the incorrect letter is already guessed
+            if (wrongLetter.includes(userGuess)) {
+
+                // feedback to check success
+                console.log('Wrong guess already answered');
+
+            } else if (guessesLeft > 0) {
+
+
+
+                // If incorrect letter given, push to wrongLetter array
+                wrongLetter.push(userGuess);
+
+                //subtract from guesses left before losing
+                guessesLeft--;
+                console.log(guessesLeft);
+
+                // Write to html the incorrect guesses & how many guesses are 
+                document.getElementById('guessesMade').innerHTML = wrongLetter.join(', ');
+                document.getElementById('remainingGuesses').innerHTML = guessesLeft;
+                            
+            } else {
+
+                alert("You Lose!")
+                // document.getElementById('remainingGuesses').innerHTML = "You lose!";
+                losses++;
+                document.getElementById('losses').innerHTML = losses;
+
+                reset();
+            }
+
         }
 
-    }
+
+    };
 
 
-}
+
 
 
 
