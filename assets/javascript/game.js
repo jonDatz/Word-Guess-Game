@@ -1,6 +1,10 @@
 // create array for words
 
-var hmWord = ['squirtle', 'charmander', 'bulbasaur', 'diglett', 'dragonite', 'tentacool']; // Words to choose from
+var hmWord = ['squirtle', 'charmander', 'bulbasaur', 
+              'diglett', 'dragonite', 'tentacool',
+              'ponyta', 'mewtwo', 'charizard',
+            
+            ]; // Words to choose from
 
 // For repeat letters
 
