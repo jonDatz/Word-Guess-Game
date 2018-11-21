@@ -4,7 +4,7 @@ var hmWord = ['squirtle', 'charmander', 'bulbasaur', 'diglett', 'dragonite', 'te
 
 // For repeat letters
 
-var doubleWord = ['a', 'b', 'c',
+var doubleLetter = ['a', 'b', 'c',
                   'd', 'e', 'f',
                   'g', 'h', 'i',
                   'j', 'k', 'l',
@@ -31,6 +31,24 @@ var losses = 0;
 // *** I NEED TO BUILD A RESET ***
 
 function reset() {
+    
+rightLetter.length = 0;   // THIS SETS ARRAY BACK TO EMPTY
+wrongLetter.length = 0;   // All of these arrays get reset DO NOT TOUCH
+underScore.length = 0;
+guessesLeft = 10;
+
+document.getElementById('remainingGuesses').innerHTML = guessesLeft;
+
+hmNumber = Math.floor(Math.random() * hmWord.length); // RESELECTS WORD
+pickWord = hmWord[hmNumber];                          //
+lettersInWord = [];                                   //
+
+lettersInWord = pickWord.split(''); // SPLITS WORD INTO lettersInWord Array
+console.log(lettersInWord);
+
+document.getElementById('guessesMade').innerHTML = wrongLetter.join(', '); // CLEAR THE DOM element
+
+makeUnderscores(); // Run function to create underscores
 
 console.log('It runs!');
     
@@ -74,15 +92,16 @@ console.log(makeUnderscores()); // Console out to check that underscores printed
         console.log(userGuess);
 
         
-        if (pickWord.indexOf(userGuess) > -1) {
+        if (lettersInWord.indexOf(userGuess) > -1) {
 
-            for (var j = 0; j < pickWord.length; j++) {
+            for (var j = 0; j < lettersInWord.length; j++) {
 
                 if(lettersInWord[j] === userGuess){
                                     
                     rightLetter.push(userGuess);
 
-                underScore[pickWord.indexOf(userGuess)] = userGuess;
+                    underScore[lettersInWord.indexOf(userGuess)] = userGuess;
+                    underScore[lettersInWord.lastIndexOf(userGuess)] = userGuess;
                 }
 
 
@@ -96,10 +115,11 @@ console.log(makeUnderscores()); // Console out to check that underscores printed
         // *** YOU WIN!!! But it's triggered too late. Where do i add this?
         else if (underScore.join('') === pickWord){
             console.log('You win!');
+            alert('You Win!');
             wins++;
             console.log(wins);
             document.getElementById('wins').innerHTML = wins;
-
+            reset();
         }
         
             
@@ -111,7 +131,14 @@ console.log(makeUnderscores()); // Console out to check that underscores printed
                 // feedback to check success
                 console.log('Wrong guess already answered');
 
-            } else if (guessesLeft > 0) {
+            }
+
+            // else if(doubleLetter.includes(userGuess)){
+
+
+            // }
+            
+            else if (guessesLeft > 0) {
 
 
 
